@@ -14,7 +14,7 @@ Route::get('/', function () {
 })->name('api.welcome');
 
 Route::get('/clear-cache', function () {
-    Cache::tags(app_key())->flush();
+    Cache::tags([app_key()])->flush();
 
     return response()->json([
         'status'  => 'success',

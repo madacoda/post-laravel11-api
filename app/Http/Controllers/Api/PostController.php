@@ -58,7 +58,7 @@ class PostController extends Controller
     }
 
     function find($id) {
-        $data = Cache::tags([app_key(), 'posts'])->rememberForever(cache_key('posts', request()->all()), function() use($id) { 
+        $data = Cache::tags([app_key(), 'posts'])->rememberForever(cache_key('posts', ['id' => $id]), function() use($id) { 
             return new PostDetailResource($this->postRepository->findWithComments($id));
         });
 
@@ -131,6 +131,8 @@ class PostController extends Controller
         }
 
         $this->postRepository->destroy($id);
+
+        Cache::tags(['posts'])->flush();
 
         return response()->json([
             'status'  => 'success',
