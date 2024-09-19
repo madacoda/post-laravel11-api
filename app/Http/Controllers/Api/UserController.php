@@ -33,10 +33,9 @@ class UserController extends Controller
 
         $data = Cache::tags([app_key(), 'users'])->rememberForever(cache_key('users', request()->all()), function() use($limit) { 
             $data = $this->userRepository->paginate($limit);
+            UserResource::collection($data);
             return $data;
         });
-
-        UserResource::collection($data);
 
         return response()->json([
             'status'  => 'success',

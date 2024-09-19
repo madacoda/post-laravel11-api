@@ -15,6 +15,21 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        Cache::tags(['users'])->flush();
+        $users = [
+            [
+                'name' => 'Hamada',
+                'email' => 'hamada.undetected@gmail.com',
+                'password' => bcrypt('madacoda')
+            ],
+            [
+                'name' => 'Madacoda',
+                'email' => 'me@madacoda.dev',
+                'password' => bcrypt('madacoda')
+            ],
+        ];
+
+        foreach($users as $user) {
+            User::updateOrCreate(['email' => $user['email']], $user);
+        }
     }
 }
