@@ -30,10 +30,6 @@ class AuthController extends Controller
         $token       = $user->createToken('authToken')->plainTextToken;
         $user->token = $token;
 
-        dispatch(function () use ($user) {
-            Mail::to($user->email)->send(new WelcomeMail($user));
-        });
-
         return response()->json([
             'status'  => 'success',
             'data'    => $user,
@@ -56,6 +52,10 @@ class AuthController extends Controller
         $user->token = $token;
 
         Cache::tags(['users'])->flush();
+
+        dispatch(function () use ($user) {
+            Mail::to($user->email)->send(new WelcomeMail($user));
+        });
 
         return response()->json([
             'status'  => 'success',
