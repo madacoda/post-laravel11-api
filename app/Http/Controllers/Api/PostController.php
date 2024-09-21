@@ -24,9 +24,9 @@ class PostController extends Controller
 
         $data = Cache::tags([app_key(), 'posts'])->rememberForever(cache_key('posts', request()->all()), function() use($limit) { 
             $data = $this->postRepository->paginate($limit);
-            PostResource::collection($data);
             return $data;
         });
+        PostResource::collection($data);
 
         return response()->json([
             'status'  => 'success',

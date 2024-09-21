@@ -11,9 +11,9 @@ class PostRepository extends Repository
         $this->model = new Post();
     }
 
-    function paginate($limit = 10) {
-        return $this->model->latest()->cursorPaginate($limit);
-    }
+    // function paginate($limit = 10) {
+    //     return $this->model->latest()->cursorPaginate($limit);
+    // }
 
     function findWithComments($id) {
         return $this->model->with(['user', 'comments.user'])->find($id);
