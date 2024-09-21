@@ -20,7 +20,7 @@ Route::get('/clear-cache', function () {
         'status'  => 'success',
         'message' => 'Cache flushed successfully.'
     ]);
-})->name('api.welcome');
+})->name('api.clea-cache');
 
 Route::get('/test-email/{email}', function () {
     $user = (object) [
