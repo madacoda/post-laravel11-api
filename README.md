@@ -25,7 +25,7 @@ php artisan migrate
 
 5. Clear Redis Cache:
 Flush the Redis cache to ensure a clean state:
-`php artisan redis:flush`
+`php artisan optimize:clear`
 
 6. Run Tests:
 Execute the test suite to verify the application:
